@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     Rigidbody rb;
     float horizontal_input, magnitude;
     Vector3 moveDirection;
+    int moneda = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -42,10 +43,15 @@ public class Ball : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log (collision.gameObject.tag);
         if (collision.gameObject.CompareTag ("Obstaculo"))
         {
             Destroy(gameObject);
+            //GameManager.GetComponent<Game_Manager>().EndGame();
+        }
+        if (collision.gameObject.CompareTag ("Monedas"))
+        {
+            Destroy(collision.gameObject);
+            HUD.AddMoneda(moneda);
             //GameManager.GetComponent<Game_Manager>().EndGame();
         }
     }
